@@ -21,9 +21,8 @@ fn touches((x, y): (i32, i32), ((x1, y1), (x2, y2)): ((i32, i32), (i32,i32))) ->
         return x == x1 && y <= max_y && y >= min_y;
     } else if y1 == y2 {
         // Horizontal line
-        return y == y1 && x <= max_y && x >= min_x;
+        return y == y1 && x <= max_x && x >= min_x;
     } else {
-    
         return false;
     }
 }
