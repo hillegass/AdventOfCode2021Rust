@@ -24,9 +24,6 @@ fn main() {
         counts[GESTATION_PERIOD] += child_bearing;
         println!("After {} day:{:?}", day + 1, counts);
     }
-    let mut sum = 0;
-    for fcount in counts {
-        sum += fcount;
-    }
+    let sum = counts.iter().sum::<u64>();
     println!("Total fish:{}", sum);
 }
