@@ -22,7 +22,7 @@ fn main() {
         counts.remove(0);
         counts.push(child_bearing);
         counts[GESTATION_PERIOD] += child_bearing;
-        println!("After {} day:{:?}", day + 1, counts);
+        println!("After {} days:{:?}", day + 1, counts);
     }
     let sum = counts.iter().sum::<u64>();
     println!("Total fish:{}", sum);
