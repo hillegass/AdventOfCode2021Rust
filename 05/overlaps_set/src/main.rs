@@ -1,6 +1,6 @@
-use std::io::{self, BufRead};
 use std::cmp;
 use std::collections::HashSet;
+use std::io::{self, BufRead};
 
 fn get_tuples(input: &str) -> (i32, i32) {
     let strs = input.split(",").collect::<Vec<&str>>();
@@ -13,7 +13,7 @@ fn points_for_endpoints(endpoint1: (i32, i32), endpoint2: (i32, i32)) -> Vec<(i3
     let mut points = Vec::new();
     let (x1, y1) = endpoint1;
     let (x2, y2) = endpoint2;
-   
+
     if x1 == x2 {
         // Vertical line
         let min_y = cmp::min(y1, y2);
@@ -34,8 +34,8 @@ fn points_for_endpoints(endpoint1: (i32, i32), endpoint2: (i32, i32)) -> Vec<(i3
 
 fn main() {
     let stdin = io::stdin();
-    let mut touched_points:HashSet<(i32, i32)> = HashSet::new();
-    let mut counted_points:HashSet<(i32, i32)> = HashSet::new();
+    let mut touched_points: HashSet<(i32, i32)> = HashSet::new();
+    let mut counted_points: HashSet<(i32, i32)> = HashSet::new();
 
     let mut count = 0;
     for line in stdin.lock().lines() {
@@ -46,9 +46,8 @@ fn main() {
         }
         let endpoint1 = get_tuples(words[0]);
         let endpoint2 = get_tuples(words[2]);
-        let points:Vec<(i32, i32)> = points_for_endpoints(endpoint1, endpoint2);
+        let points: Vec<(i32, i32)> = points_for_endpoints(endpoint1, endpoint2);
         for point in points {
-
             // 3rd or more time seeing this poing?
             if counted_points.contains(&point) {
                 continue;

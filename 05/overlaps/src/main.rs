@@ -1,5 +1,5 @@
-use std::io::{self, BufRead};
 use std::cmp;
+use std::io::{self, BufRead};
 
 const X_LEN: i32 = 1000;
 const Y_LEN: i32 = 1000;
@@ -11,7 +11,7 @@ fn get_tuples(input: &str) -> (i32, i32) {
     (x, y)
 }
 
-fn touches((x, y): (i32, i32), ((x1, y1), (x2, y2)): ((i32, i32), (i32,i32))) -> bool {
+fn touches((x, y): (i32, i32), ((x1, y1), (x2, y2)): ((i32, i32), (i32, i32))) -> bool {
     let min_x = cmp::min(x1, x2);
     let max_x = cmp::max(x1, x2);
     let min_y = cmp::min(y1, y2);
@@ -29,7 +29,7 @@ fn touches((x, y): (i32, i32), ((x1, y1), (x2, y2)): ((i32, i32), (i32,i32))) ->
 
 fn main() {
     let stdin = io::stdin();
-    let mut endpoints:Vec<((i32, i32),(i32,i32))> = Vec::new();
+    let mut endpoints: Vec<((i32, i32), (i32, i32))> = Vec::new();
     for line in stdin.lock().lines() {
         let line_str = line.unwrap();
         let words = line_str.split_whitespace().collect::<Vec<_>>();

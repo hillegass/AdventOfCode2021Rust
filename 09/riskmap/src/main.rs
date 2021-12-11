@@ -22,7 +22,7 @@ fn main() {
     let width = grid[0].len();
     let height = grid.len();
 
-    let mut sum:u32 = 0;
+    let mut sum: u32 = 0;
     for col in 0..width {
         for row in 0..height {
             let less_than_above = (row == 0) || (grid[row][col] < grid[row - 1][col]);

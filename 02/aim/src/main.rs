@@ -13,7 +13,7 @@ fn main() {
             "forward" => {
                 horizontal += value;
                 depth += value * aim
-            },
+            }
             "down" => aim += value,
             "up" => aim -= value,
             _ => println!("Unknown command:{}", direction),

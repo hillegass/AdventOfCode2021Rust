@@ -1,10 +1,15 @@
-use std::io::{self, Read};
 use std::collections::HashSet;
+use std::io::{self, Read};
 
-fn add_to_basin(input: &Vec<Vec<u8>>, partial_basin: &mut HashSet<(usize, usize)>, height: usize, width:usize) -> bool {
+fn add_to_basin(
+    input: &Vec<Vec<u8>>,
+    partial_basin: &mut HashSet<(usize, usize)>,
+    height: usize,
+    width: usize,
+) -> bool {
     let mut something_added = false;
     let to_check = partial_basin.clone();
-    for (r,c) in to_check {
+    for (r, c) in to_check {
         if c > 0 && !partial_basin.contains(&(r, c - 1)) && input[r][c - 1] != 9 {
             partial_basin.insert((r, c - 1));
             something_added = true;
@@ -24,7 +29,7 @@ fn add_to_basin(input: &Vec<Vec<u8>>, partial_basin: &mut HashSet<(usize, usize)
     }
     return something_added;
 }
-    
+
 fn main() {
     let stdin = io::stdin();
     let mut handle = stdin.lock();

@@ -1,11 +1,11 @@
-use std::io::{self, BufRead};
 use std::collections::HashSet;
+use std::io::{self, BufRead};
 
 const ROW_COL_COUNT: usize = 5;
 
-fn read_boards(input:&Vec<String>) -> Vec<[[i32; ROW_COL_COUNT]; ROW_COL_COUNT]> {
+fn read_boards(input: &Vec<String>) -> Vec<[[i32; ROW_COL_COUNT]; ROW_COL_COUNT]> {
     let mut result = Vec::new();
-    let mut row_count:usize = 0;
+    let mut row_count: usize = 0;
     let mut board_array = [[0; ROW_COL_COUNT]; ROW_COL_COUNT];
     for row in input.iter() {
         let row_vec = row.split_whitespace().collect::<Vec<&str>>();
@@ -31,12 +31,15 @@ fn read_boards(input:&Vec<String>) -> Vec<[[i32; ROW_COL_COUNT]; ROW_COL_COUNT]>
     result
 }
 
-fn board_completed(called_numbers:&HashSet<i32>, board:&[[i32; ROW_COL_COUNT]; ROW_COL_COUNT]) -> bool {
+fn board_completed(
+    called_numbers: &HashSet<i32>,
+    board: &[[i32; ROW_COL_COUNT]; ROW_COL_COUNT],
+) -> bool {
     // Check for complete rows
     for row in 0..ROW_COL_COUNT {
         let mut is_missing = false;
         for col in 0..ROW_COL_COUNT {
-            is_missing = !called_numbers.contains(&board[row][col]) ;
+            is_missing = !called_numbers.contains(&board[row][col]);
             if is_missing {
                 break;
             }
@@ -50,7 +53,7 @@ fn board_completed(called_numbers:&HashSet<i32>, board:&[[i32; ROW_COL_COUNT]; R
     for col in 0..ROW_COL_COUNT {
         let mut is_missing = false;
         for row in 0..ROW_COL_COUNT {
-            is_missing = !called_numbers.contains(&board[row][col]) ;
+            is_missing = !called_numbers.contains(&board[row][col]);
             if is_missing {
                 break;
             }
@@ -62,8 +65,11 @@ fn board_completed(called_numbers:&HashSet<i32>, board:&[[i32; ROW_COL_COUNT]; R
     }
     return false;
 }
-    
-fn indexes_of_completed_board(called_numbers:&HashSet<i32>, boards:&Vec<[[i32; ROW_COL_COUNT]; ROW_COL_COUNT]>) -> Vec<usize> {
+
+fn indexes_of_completed_board(
+    called_numbers: &HashSet<i32>,
+    boards: &Vec<[[i32; ROW_COL_COUNT]; ROW_COL_COUNT]>,
+) -> Vec<usize> {
     let mut result = Vec::new();
     // If we haven't called 5 numbers, skip this altogether
     if called_numbers.len() < ROW_COL_COUNT {
@@ -78,7 +84,10 @@ fn indexes_of_completed_board(called_numbers:&HashSet<i32>, boards:&Vec<[[i32; R
     result
 }
 
-fn sum_of_uncalled_numbers(called_numbers:&HashSet<i32>, board  :&[[i32; ROW_COL_COUNT]; ROW_COL_COUNT]) -> i32 {
+fn sum_of_uncalled_numbers(
+    called_numbers: &HashSet<i32>,
+    board: &[[i32; ROW_COL_COUNT]; ROW_COL_COUNT],
+) -> i32 {
     let mut result = 0;
     for r in 0..ROW_COL_COUNT {
         for c in 0..ROW_COL_COUNT {
@@ -94,14 +103,17 @@ fn main() {
     let stdin = io::stdin();
     let mut lines = stdin.lock().lines().map(|l| l.unwrap()).collect::<Vec<_>>();
 
-    let numbers = lines[0].split(",").map(|n| n.parse::<i32>().unwrap()).collect::<Vec<i32>>();
+    let numbers = lines[0]
+        .split(",")
+        .map(|n| n.parse::<i32>().unwrap())
+        .collect::<Vec<i32>>();
     lines.remove(0);
     lines.remove(0);
 
     let mut boards = read_boards(&lines);
     // println!("{:?}", numbers);
 
-    let mut current_round:usize = 0;
+    let mut current_round: usize = 0;
     let mut called_numbers = HashSet::new();
     let mut winning_board = boards[0];
 
@@ -125,6 +137,10 @@ fn main() {
     let last_number = numbers[current_round - 1];
     let sum = sum_of_uncalled_numbers(&called_numbers, &winning_board);
 
-    println!("Sum:{}, Last num:{}, Product:{}", sum, last_number, last_number * sum);
-
+    println!(
+        "Sum:{}, Last num:{}, Product:{}",
+        sum,
+        last_number,
+        last_number * sum
+    );
 }

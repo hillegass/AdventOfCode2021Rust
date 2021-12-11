@@ -9,8 +9,8 @@ fn main() {
     let stdin = io::stdin();
     let lines = stdin.lock().lines().map(|l| l.unwrap()).collect::<Vec<_>>();
     let numbers = lines[0].split(",");
-    
-    let mut counts:Vec<u64> = vec![0; MAX_AGE + 1];
+
+    let mut counts: Vec<u64> = vec![0; MAX_AGE + 1];
     for number in numbers {
         counts[number.parse::<usize>().unwrap()] += 1;
     }
